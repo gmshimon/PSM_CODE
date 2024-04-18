@@ -1,0 +1,62 @@
+/* Media Queries */
+
+        /* Samsung Galaxy S8+ */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-device-pixel-ratio: 4)  {
+
+            .contactus-section {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 2rem;
+            }
+            .contactus-section img {
+              width: 80%;
+              border: 1px solid #000;
+              border-radius: 0.25rem;
+            }
+            .contactus-section h1 {
+              text-align: center;
+              font-size: 1.5rem;
+              color: grey;
+            }
+            .contactus-section p {
+              text-align: center;
+              margin-right: 1rem;
+              margin-left: 1rem;
+              font-size: 0.8rem;
+              color: grey;
+            }
+            .contactus-section i {
+              font-size: 0.8rem;
+            }
+  
+              }
+  /* Tablet */
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .contactus-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 3rem;
+    }
+    .contactus-section img {
+      width: 60%;
+      border: 1px solid #000;
+      border-radius: 0.25rem;
+    }
+    .contactus-section h1 {
+      text-align: center;
+      color: grey;
+    }
+    .contactus-section p {
+      text-align: center;
+      margin-right: 2rem;
+      margin-left: 2rem;
+      color: grey;
+    }
+    .contactus-section i {
+      font-size: 1.2rem;
+    }
+  }
+             
+          

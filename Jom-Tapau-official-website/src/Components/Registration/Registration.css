@@ -1,0 +1,16 @@
+  body,html {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}  
+ .registration-div{
+    height: calc(100vh + 100px)
+ }
+
+ @media (max-width: 768px) {
+    .reg-img-container{
+      display: none;
+    }
+ }

@@ -1,0 +1,29 @@
+.payment-box{
+    background-color: rgb(251, 251, 251)
+}
+.deliveryDetails,.personalDetails,.payment-container{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color:white;
+}
+
+
+@media (max-width: 768px) {
+    .payment-box{
+        /* height: 100vh; */
+    }
+    .deliveryDetails,.personalDetails,.payment-container{
+        width: 350px;
+        flex-direction: column;
+    }
+    .details-container{
+        flex-direction: column;
+    }
+    .orderStyle{
+        margin-bottom: 30px;
+    }
+    .emailStyle{
+        margin-bottom: 20px;
+    }
+}

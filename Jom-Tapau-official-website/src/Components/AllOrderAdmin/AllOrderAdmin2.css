@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+    .order-details{
+        flex-direction: column;
+    }
+    .order-details>div>span{
+        display: block;
+    }
+    .able-container{
+        width: 500px !important;
+    }
+}

@@ -1,0 +1,5 @@
+@media (max-width:786px) {
+    .dashboard-container{
+        width:250px !important;
+    }
+}

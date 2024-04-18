@@ -1,0 +1,33 @@
+    /* Media queries for iPhone X/XS/11 Pro */
+    @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+        .d-flex.justify-content-around {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .mt-5 {
+            margin-top: 2rem;
+        }
+
+        div:nth-of-type(2) {
+            margin-top: 2rem;
+        }
+    }
+
+    /* Media queries for Samsung Galaxy S8+ */
+    @media only screen and (min-device-width: 360px) and (max-device-width: 740px) and (-webkit-device-pixel-ratio: 4) {
+        .d-flex.justify-content-around {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .mt-5 {
+            margin-top: 2rem;
+        }
+
+        div:nth-of-type(2) {
+            margin-top: 2rem;
+        }
+    }

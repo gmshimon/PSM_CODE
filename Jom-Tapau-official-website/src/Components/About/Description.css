@@ -1,0 +1,36 @@
+
+/* Media Queries */   
+          /* iPhone X/XS/11 Pro, Samsung Galaxy S8+ */
+          @media only screen and (max-width: 375px) and (max-width: 667px) {
+
+            .custom {
+               font-size: 50px;
+            }
+
+            .description-section {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 2rem;
+            }
+            .description-section img {
+              width: 80%;
+              border: 1px solid #000;
+              border-radius: 0.25rem;
+            }
+            .description-section h1 {
+              text-align: center;
+              font-size: 1.5rem;
+              color: grey;
+            }
+            .description-section p {
+              text-align: center;
+              margin-right: 1rem;
+              margin-left: 1rem;
+              font-size: 0.8rem;
+              color: grey;
+            }
+            .description-section i {
+              font-size: 1.8rem;
+            }
+        }
