@@ -7,11 +7,12 @@ const useAddUserDb = newUser =>{
         email:newUser?.email||newUser?.email||'',
         phoneNumber:newUser?.phoneNumber||'',
         matricValue:newUser?.matricValue||'',
-        address:newUser?.address||''
+        address:newUser?.addressValue||''
     }
     console.log(user);
     useEffect(()=>{
-        fetch('https://jomtapaubackend-singapore.onrender.com/user',{
+        //https://jomtapaubackend-singapore.onrender.com/user
+        fetch('http://localhost:5000/user',{
             method:'POST',
             headers:{
                 'content-type': 'application/json'

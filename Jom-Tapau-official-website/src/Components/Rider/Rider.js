@@ -20,7 +20,7 @@ const Rider = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("https://jomtapaubackend-singapore.onrender.com/user")
+    fetch("http://localhost:5000/user")
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
@@ -29,14 +29,14 @@ const Rider = () => {
         let riderUser = [];
         let remainning = [];
         data.map((user) => {
-          if (user.rider == true) {
+          if (user.rider === true) {
             riderUser.push(user);
           } else if (user.rider == "rejected") {
           } else {
             remainning.push(user);
           }
 
-          if (user.rider != true) {
+          if (user.rider !== true) {
             applicantRider.push(user);
           }
         });
@@ -44,7 +44,7 @@ const Rider = () => {
         setNotRider(remainning);
         setApplicants(applicantRider);
       });
-  }, []);
+  }, [userDetails]);
 
   const handleAddRider = () => {
     setAddRider(!addRider);
@@ -54,6 +54,8 @@ const Rider = () => {
     setAppBtn(!appBtn);
     setAddRider(false);
   };
+
+  console.log(allRiders)
   return (
     <div>
       <Helmet>

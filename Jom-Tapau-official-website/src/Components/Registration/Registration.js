@@ -12,10 +12,14 @@ import "./Registration.css";
 import Loading from "../Loading/Loading";
 import Helmet from "react-helmet";
 import useAddUserDb from "../../hooks/useAddUserDb";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/User/userSlice";
 
 const Registration = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth); //create user with email and password
+  const dispatch = useDispatch()
+  const {userEmail, isRegisterLoading,error} = useSelector(state=>state.user)
+  // const [createUserWithEmailAndPassword, user, loading, error] =
+  //   useCreateUserWithEmailAndPassword(auth); //create user with email and password
 
   const [signInWithFacebook, fbUser, fbLoading, fbError] =
     useSignInWithFacebook(auth);
@@ -38,8 +42,9 @@ const Registration = () => {
   const password = useRef("");
   const matric = useRef("");
   const phoneNumber = useRef("");
+  const address = useRef("");
 
-  useAddUserDb(newUser || fbUser?.user); //send registred user data to database
+  useAddUserDb(newUser); //send registred user data to database
 
   // function of signup button to register an user
   const handleSignUp = async (e) => {
@@ -49,14 +54,16 @@ const Registration = () => {
     const passwordValue = password.current.value;
     const phoneNumberValue = phoneNumber.current.value;
     const matricValue = matric.current.value;
+    const addressValue = address.current.value;
     const createUser = {
       name: nameValue,
       email: emailValue.toLocaleLowerCase(),
       phoneNumber: phoneNumberValue,
       matricValue: matricValue,
+      addressValue:addressValue
     };
     setUser(createUser);
-    await createUserWithEmailAndPassword(emailValue, passwordValue);
+    dispatch(registerUser({emailValue,passwordValue}))
     await updateProfile({ displayName: nameValue });
     await sendEmailVerification();
     // navigate(from, {replace:true});
@@ -74,7 +81,7 @@ const Registration = () => {
     }
   };
 
-  if (loading || updating || sending || fbLoading) {
+  if (isRegisterLoading || updating || sending || fbLoading) {
     return <Loading></Loading>;
   }
   if (newUser || fbUser) {
@@ -194,7 +201,7 @@ const Registration = () => {
                   />
                   <label className="did-floating-label">Matric</label>
                 </div>
-                {/* <div className="did-floating-label-content did-error-input">
+                <div className="did-floating-label-content did-error-input">
                   <input
                     width={50}
                     ref={address}
@@ -204,7 +211,7 @@ const Registration = () => {
                     // size={15}
                   />
                   <label className="did-floating-label">Address</label>
-                </div> */}
+                </div>
                 <div className="did-floating-label-content did-error-input">
                   <input
 

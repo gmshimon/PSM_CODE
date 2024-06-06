@@ -13,6 +13,7 @@ import useGetUser from "../../hooks/useGetUser";
 const Head = ({ count }) => {
   const [user, loading, error] = useAuthState(auth);
   const { userDetails } = useGetUser();
+  console.log(userDetails)
   if (loading) {
     return <Loading></Loading>;
   }

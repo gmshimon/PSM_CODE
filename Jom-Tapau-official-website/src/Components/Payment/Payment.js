@@ -321,10 +321,10 @@ const Payment = ({ cart,setCount }) => {
                 <label htmlFor="Cash on Delivery"> 
                   <span className="fw-semibold">Cash on Delivery</span>
                 </label><br/>
-                {/* <input className="me-3" type="radio" id="card" name="age" value="Card"/>
+                <input className="me-3" type="radio" id="card" name="age" value="Card"/>
                 <label htmlFor="card">
                   <span className="fw-semibold mb-3">Credit or Debit Card</span>
-                </label> */}
+                </label>
                 <br/>  
                   
                   {
