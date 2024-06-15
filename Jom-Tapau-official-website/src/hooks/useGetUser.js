@@ -20,7 +20,7 @@ const useGetUser = () =>{
         
         setUserDetails(data);
           });
-      }, [user?.email])
+      }, [user,userDetails.rider])
 
       return{userDetails}
 

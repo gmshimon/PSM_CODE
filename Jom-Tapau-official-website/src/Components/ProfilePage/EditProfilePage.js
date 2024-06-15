@@ -18,7 +18,7 @@ const EditProfilePage = () => {
   const email = user?.email;
   //fetch the user from the database
   useEffect(() => {
-    fetch("https://jomtapaubackend-singapore.onrender.com/findUser", {
+    fetch("http://localhost:5000/findUser", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -44,7 +44,7 @@ const EditProfilePage = () => {
   };
   const submit = (e) => {
     e.preventDefault();
-    fetch(`https://jomtapaubackend-singapore.onrender.com/user/${userDetails._id}`, {
+    fetch(`http://localhost:5000/user/${userDetails._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

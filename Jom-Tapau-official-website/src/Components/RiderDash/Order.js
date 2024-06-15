@@ -15,7 +15,7 @@ const Order = ({order}) => {
 
     const handleAcceptOrder = id =>{
         console.log(id)
-        fetch('https://jomtapaubackend-singapore.onrender.com/updateRiderOrder',{
+        fetch('http://localhost:5000/updateRiderOrder',{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

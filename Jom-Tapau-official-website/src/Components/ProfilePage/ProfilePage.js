@@ -13,6 +13,7 @@ const ProfilePage = () => {
   const navigate = useNavigate()
   const [user, loading, error] = useAuthState(auth)
   const [userDetails, setUserDetails] = useState('')
+  const [isRider,setIsRider] = useState(false)
   const email = user?.email
   //fetch the user from the database
   useEffect(() => {
@@ -25,9 +26,22 @@ const ProfilePage = () => {
     })
       .then(response => response.json())
       .then(data => {
+        if(data.rider===true){
+            setIsRider(true)
+        }
         setUserDetails(data)
       })
-  }, [email])
+  }, [email,userDetails])
+  const handleApplyRider=(id)=>{
+    console.log(id)
+    fetch(`http://localhost:5000/applyRider`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }
   const handleClick = () => {
     navigate(`/editprofile/${userDetails._id}`)
   }
@@ -104,6 +118,13 @@ const ProfilePage = () => {
               </tr>
             </tbody>
           </table>
+          <div className='d-flex justify-content-center'>
+           {
+            isRider?<p>Already Rider</p>:userDetails?.rider===false ? <p>Applied</p>:
+            <button onClick={()=>handleApplyRider(userDetails?._id)} type="button" class="btn btn-info">Apply for Rider</button>
+           }
+          </div>
+
         </div>
       </section>
     </div>

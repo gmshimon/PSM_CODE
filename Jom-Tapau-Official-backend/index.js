@@ -18,7 +18,8 @@ const stripe = require('stripe')(
 const user = process.env.DB_USER
 const password = process.env.DB_PASS
 
-const uri = `mongodb://localhost:27017`
+// const uri = `mongodb://localhost:27017`
+const uri = 'mongodb+srv://Jom-tapau:7HILWlQ1XiBrvoe6@cluster0.xpxsbcb.mongodb.net/?retryWrites=true&w=majority'
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -84,6 +85,18 @@ async function run () {
       const result = await userCollection.findOne(query)
       res.send(result)
     })
+
+    //apply for the rider
+    app.put('/applyRider', async (req, res) => {
+      const id = req.body.id
+      console.log(id)
+      const filter = { _id: ObjectId(id) }
+      const options = { upset: true }
+      const update = { $set: { rider: false } }
+
+      const result = await userCollection.updateOne(filter, update, options)
+    })
+
     //approve an user to rider
     app.put('/addRider', async (req, res) => {
       const id = req.body.id
@@ -93,8 +106,6 @@ async function run () {
       const update = { $set: { rider: true } }
 
       const result = await userCollection.updateOne(filter, update, options)
-
-      console.log(result)
     })
 
     //reject teh rider
@@ -106,7 +117,7 @@ async function run () {
       const update = { $set: { rider: 'rejected' } }
       const result = await userCollection.updateOne(filter, update, options)
 
-      console.log(result)
+ 
     })
 
     //get data from the food collection

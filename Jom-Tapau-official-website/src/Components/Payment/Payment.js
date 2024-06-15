@@ -86,7 +86,7 @@ const Payment = ({ cart,setCount }) => {
       setDeliveryTime("Dinner")
     }
 
-    fetch("https://jomtapaubackend-singapore.onrender.com/findUser", {
+    fetch("http://localhost:5000/findUser", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -161,7 +161,7 @@ const Payment = ({ cart,setCount }) => {
       orders:cart
     }
     console.log(newOrder)
-    fetch('https://jomtapaubackend-singapore.onrender.com/postOrder',{
+    fetch('http://localhost:5000/postOrder',{
       method:"POST",
       headers:{
         "content-type": "application/json",

@@ -15,7 +15,7 @@ const AllOrders = () => {
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
   useEffect(() => {
-    fetch("https://jomtapaubackend-singapore.onrender.com/riderOrders", {
+    fetch("http://localhost:5000/riderOrders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -34,7 +34,7 @@ const AllOrders = () => {
 
   const handleDeliverOrder = id =>{
     console.log("delivered ",id)
-    fetch('https://jomtapaubackend-singapore.onrender.com/updateRiderOrder',{
+    fetch('http://localhost:5000/updateRiderOrder',{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
@@ -52,7 +52,7 @@ const AllOrders = () => {
 
   const handleClickCancel = id =>{
     console.log("Cancel ",id)
-    fetch('https://jomtapaubackend-singapore.onrender.com/updateRiderOrder',{
+    fetch('http://localhost:5000/updateRiderOrder',{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

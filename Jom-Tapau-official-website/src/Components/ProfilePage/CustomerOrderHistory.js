@@ -12,7 +12,7 @@ const CustomerOrderHistory = () => {
 
 
   useEffect(() => {
-    fetch("https://jomtapaubackend-singapore.onrender.com/findUserOrder", {
+    fetch("http://localhost:5000/findUserOrder", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -120,7 +120,7 @@ const Menu = ({ handleAddtoCart }) => {
 
       <div className="items">
         {foods.map((food) => (
-          <div className="col-lg-3 col-md-6 col-sm-12" key={food._id}>
+          <div className="col-lg-4 col-md-6 col-sm-12" key={food._id}>
             <Item handleAddtoCart={handleAddtoCart} food={food} />
           </div>
         ))}

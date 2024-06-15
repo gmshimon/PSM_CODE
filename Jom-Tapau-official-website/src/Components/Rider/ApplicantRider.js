@@ -4,9 +4,8 @@ import useRiders from "../../hooks/useRiders";
 const ApplicantRider = (props) => {
   const { applicants } = useRiders();
   // const applicants = props.applicants;
-  console.log(props.applicants);
   const handleRejectRider = (id) => {
-    console.log(id);
+ 
     //reject the rider
     fetch("http://localhost:5000/rejectRider", {
       method: "PUT",
@@ -17,7 +16,7 @@ const ApplicantRider = (props) => {
       .then((data) => console.log(data));
   };
   const handleApproveRider = (id) => {
-    console.log(id);
+
     //update the rider
     fetch(`http://localhost:5000/addRider`, {
       method: "PUT",
@@ -82,7 +81,7 @@ const ApplicantRider = (props) => {
                               Approve
                             </button>
                           </span>
-                          <span className="fa-stack table-link text-info">
+                          <span className="fa-stack table-link text-info ms-5">
                             <button
                               type="button"
                               className="btn btn-danger"

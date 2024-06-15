@@ -11,7 +11,7 @@ const useAddUserDb = newUser =>{
     }
     console.log(user);
     useEffect(()=>{
-        //https://jomtapaubackend-singapore.onrender.com/user
+        //http://localhost:5000/user
         fetch('http://localhost:5000/user',{
             method:'POST',
             headers:{
