@@ -1,5 +1,6 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const express = require('express')
+const nodemailer = require('nodemailer')
 const cors = require('cors')
 var bodyParser = require('body-parser')
 const { query } = require('express')
@@ -25,6 +26,70 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1
 })
+
+const client_ID =
+  '508658699000-dsprn67sq0peddm44n65o79chusg2cre.apps.googleusercontent.com'
+const client_secret = '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'
+const refresh_token =
+  '1//04hmCwSQHiCbBCgYIARAAGAQSNwF-L9IrVPGNaRBuv7J294EqVM9AjKwdJG5HLAjh4j0aVuTV-rnE5Oq7Ow4TE5LJbd_L7i7X_K4'
+
+// Transporter configuration
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    type: 'OAuth2',
+    user: 'systematicsquad69@gmail.com',
+    pass: '#Kola9696',
+    clientId: client_ID,
+    clientSecret: client_secret,
+    refreshToken: refresh_token
+  }
+})
+
+const sendEmail = async order => {
+  // Create a string with all order items
+  let itemsText = ''
+  let itemsHtml = '<ul>'
+  order.orders.forEach(item => {
+    itemsText += `- ${item.name} (Quantity: ${item.quantity}, Price: RM${item.price})\n`
+    itemsHtml += `<li>${item.name} (Quantity: ${item.quantity}, Price: RM${item?.price})</li>`
+  })
+  itemsHtml += '</ul>'
+
+  const mailOptions = {
+    from: 'your-email@gmail.com',
+    to: order?.email,
+    subject: `Your Order #${order._id} has been Delivered!`,
+    text: `Hello ${order.customerName},
+
+We are pleased to inform you that your order #${order.orderId} has been successfully delivered.
+
+Order Details:
+${itemsText}
+If you have any questions or concerns regarding your order, please do not hesitate to contact us.
+
+Thank you for shopping with us!
+
+Best regards,
+Your Company Name`,
+    html: `<p>Hello ${order.name},</p>
+<p>We are pleased to inform you that your order <strong>#${order._id}</strong> has been successfully delivered.</p>
+<p><strong>Order Details:</strong>${itemsHtml}</p>
+<p><strong>Total Price:</strong> RM${order.total}</p>
+<p><strong>Rider Email:</strong> ${order.riderEmail}</p>
+<p>If you have any questions or concerns regarding your order, please do not hesitate to contact us.</p>
+<p>Thank you for shopping with us!</p>
+<p>Best regards,<br>
+Jom Tapau</p>`
+  }
+
+  try {
+    let info = await transporter.sendMail(mailOptions)
+    console.log('Email sent: ' + info.response)
+  } catch (error) {
+    console.error('Error sending email: ', error)
+  }
+}
 
 async function run () {
   try {
@@ -116,8 +181,6 @@ async function run () {
 
       const update = { $set: { rider: 'rejected' } }
       const result = await userCollection.updateOne(filter, update, options)
-
- 
     })
 
     //get data from the food collection
@@ -230,12 +293,16 @@ async function run () {
       const status = req.body.status
       console.log(id, riderEmail, riderName)
       const filter = { _id: ObjectId(id) }
-      const update = { $set: { status: status, riderEmail, riderName } }
+      const update = { $set: { status:status,riderEmail, riderName } }
       const options = { upset: true }
 
       const result = await orderCollection.updateOne(filter, update, options)
 
       console.log(result)
+      if (result.modifiedCount === 1) {
+        const getOrder = await orderCollection.findOne(filter)
+        sendEmail(getOrder)
+      }
       res.send(result)
     })
 

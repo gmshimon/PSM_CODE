@@ -29,7 +29,7 @@ const AllOrders = () => {
           setRiderErr("");
         } else setRiderErr("You have performed O order");
       });
-  }, [user,riderOrders]);
+  }, [user]);
 
 
   const handleDeliverOrder = id =>{
