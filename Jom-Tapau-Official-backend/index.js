@@ -18,8 +18,8 @@ const stripe = require('stripe')(
 const user = process.env.DB_USER
 const password = process.env.DB_PASS
 
-// const uri = `mongodb://localhost:27017`
-const uri = 'mongodb+srv://Jom-tapau:7HILWlQ1XiBrvoe6@cluster0.xpxsbcb.mongodb.net/?retryWrites=true&w=majority'
+const uri = `mongodb://localhost:27017`
+// const uri = 'mongodb+srv://Jom-tapau:7HILWlQ1XiBrvoe6@cluster0.xpxsbcb.mongodb.net/?retryWrites=true&w=majority'
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -147,12 +147,11 @@ async function run () {
       console.log(result)
     })
     //get food by id
-    app.get('food/:id', async (req, res) => {
+    app.get('/food/:id', async (req, res) => {
       const id = req.params.id
       const filter = { _id: ObjectId(id) }
       const result = await foodCollection.findOne(filter)
       res.send(result)
-      console.log(result)
     })
     //search food
     app.post('/searchFood', async (req, res) => {

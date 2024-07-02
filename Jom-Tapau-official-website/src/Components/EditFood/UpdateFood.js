@@ -3,10 +3,17 @@ import { useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import "./UpdateFood.css";
 import { useRef } from "react";
+
+const foodOptions = [
+  {id:1, value:"BreakFast"},
+  {id:2,value:"Lunch"},
+  {id:3,value:"Dinner"}
+]
 const UpdateFood = () => {
   const [food, singleFood] = useState({});
   const [imgurl, setImg] = useState("");
   const { foodID } = useParams();
+  // console.log(foodID);
 
   //use ref to take the inputs of the food details
   const foodName = useRef("");
@@ -22,7 +29,7 @@ const UpdateFood = () => {
         singleFood(data);
         setImg(data.imgURL);
       });
-  }, []);
+  }, [foodID]);
   /* 
         now using direct url of image to update the picture of the food
         later we will upload only the image to update the picture
@@ -43,7 +50,7 @@ const UpdateFood = () => {
       price: foodPirce,
       imgURL: imgurl,
     };
-    console.log(foodDetails);
+
     //update foodDetails
     fetch(`http://localhost:5000/food/${foodID}`, {
       method: "PUT",
@@ -60,7 +67,7 @@ const UpdateFood = () => {
   };
   return (
     <div style={{ paddingTop: "80px" }}>
-      <h1>Update Food Details</h1>
+      <h1 className="text-center">Update Food Details</h1>
       <section className="d-flex justify-content-center align-items-center w-100">
         <div className="me-5">
           <img
@@ -85,7 +92,7 @@ const UpdateFood = () => {
                       {" "}
                       <input
                         ref={foodName}
-                        style={{ width: "110%" }}
+                        style={{ width: "150%" }}
                         type="text"
                         id="updateName"
                         name="updateName"
@@ -98,7 +105,7 @@ const UpdateFood = () => {
                     <td className="profile">
                       <input
                         ref={price}
-                        style={{ width: "110%" }}
+                        style={{ width: "150%" }}
                         type="text"
                         id="updateFatherName"
                         name="updateFatherName"
@@ -111,7 +118,7 @@ const UpdateFood = () => {
                     <td className="profile">
                       {" "}
                       <input
-                        style={{ width: "110%" }}
+                        style={{ width: "150%" }}
                         type="text"
                         defaultValue={food?.imgURL}
                         onChange={handleImageUrl}
@@ -122,14 +129,33 @@ const UpdateFood = () => {
                     <td className="profile">Category:</td>
                     <td className="profile">
                       {" "}
-                      <input
+                      <select
                         ref={category}
-                        style={{ width: "110%" }}
+                        style={{ width: "150%" }}
+                        type="text"
+                        id="updateEmail"
+                        name="updateEmail" 
+                      >
+                        <option value="">Select Category</option>
+                        {
+                          foodOptions.map(opt=>
+                            opt.value===food.category?<option selected value={opt.value}>{opt.value}</option>:<option value={opt.value}>{opt.value}</option>
+                          )
+                        }
+                        {/* <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Drinks">Drinks</option> */}
+
+                      </select>
+                      {/* <input
+                        ref={category}
+                        style={{ width: "150%" }}
                         type="text"
                         id="updateEmail"
                         name="updateEmail"
                         defaultValue={food.category}
-                      />
+                      /> */}
                     </td>
                   </tr>
                 </tbody>
