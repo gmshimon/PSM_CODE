@@ -6,11 +6,13 @@ import { useState } from "react";
 import useCollapse from "react-collapsed";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import useGetUser from "../../hooks/useGetUser";
 
 const AllOrders = () => {
   const [riderOrders, setRiderOrders] = useState([]);
   const [riderErr, setRiderErr] = useState("");
   const [user, loading, error] = useAuthState(auth);
+  const { userDetails } = useGetUser();
 
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
@@ -33,7 +35,6 @@ const AllOrders = () => {
 
 
   const handleDeliverOrder = id =>{
-    console.log("delivered ",id)
     fetch('http://localhost:5000/updateRiderOrder',{
             method:'PUT',
             headers:{
@@ -42,7 +43,7 @@ const AllOrders = () => {
             body:JSON.stringify({
                 id,
                 riderEmail:user?.email,
-                riderName:user?.displayName,
+                riderName:userDetails?.name,
                 status:"Delivered"
             })
         })
@@ -51,7 +52,6 @@ const AllOrders = () => {
   }
 
   const handleClickCancel = id =>{
-    console.log("Cancel ",id)
     fetch('http://localhost:5000/updateRiderOrder',{
             method:'PUT',
             headers:{
@@ -60,7 +60,7 @@ const AllOrders = () => {
             body:JSON.stringify({
                 id,
                 riderEmail:user?.email,
-                riderName:user?.displayName,
+                riderName:userDetails?.name,
                 status:"Cancel"
             })
         })

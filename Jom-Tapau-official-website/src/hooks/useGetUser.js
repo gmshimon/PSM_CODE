@@ -13,11 +13,10 @@ const useGetUser = () =>{
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify( {email:user?.email} ),
+          body: JSON.stringify( {email:user?.email||"" } ),
         })
           .then((response) => response.json())
           .then((data) => {
-        
         setUserDetails(data);
           });
       }, [user,userDetails.rider])

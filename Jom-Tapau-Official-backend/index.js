@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 const stripe = require('stripe')(
-  'sk_test_51MMoiTGFkQKcRUEsTZeNAQCl8HGEsoTTYy1Lf2KfBsJKpOCcp44rzQVzUXOzyVkWkEIG9zj1TbzsQvsWpcJAPwhK00RLdVbM1g'
+  'sk_test_51MMQcGDknvLebi91i2QfdPbopu4IknXtSDaZoUevRjmOkkdSeaIUBfFG1kDmI56G7bFxNWeGOw07VHU2YnLr5HhB00OnhquAap'
 )
 
 const user = process.env.DB_USER
@@ -32,7 +32,7 @@ const client_ID =
 const client_secret = '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'
 const refresh_token =
   '1//04hmCwSQHiCbBCgYIARAAGAQSNwF-L9IrVPGNaRBuv7J294EqVM9AjKwdJG5HLAjh4j0aVuTV-rnE5Oq7Ow4TE5LJbd_L7i7X_K4'
-
+ 
 // Transporter configuration
 let transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -76,7 +76,7 @@ Your Company Name`,
 <p>We are pleased to inform you that your order <strong>#${order._id}</strong> has been successfully delivered.</p>
 <p><strong>Order Details:</strong>${itemsHtml}</p>
 <p><strong>Total Price:</strong> RM${order.total}</p>
-<p><strong>Rider Email:</strong> ${order.riderEmail}</p>
+<p><strong>Rider Name:</strong> ${order.riderName}</p>
 <p>If you have any questions or concerns regarding your order, please do not hesitate to contact us.</p>
 <p>Thank you for shopping with us!</p>
 <p>Best regards,<br>
@@ -298,9 +298,9 @@ async function run () {
 
       const result = await orderCollection.updateOne(filter, update, options)
 
-      console.log(result)
       if (result.modifiedCount === 1) {
         const getOrder = await orderCollection.findOne(filter)
+        if(getOrder.status === "Delivered")
         sendEmail(getOrder)
       }
       res.send(result)
