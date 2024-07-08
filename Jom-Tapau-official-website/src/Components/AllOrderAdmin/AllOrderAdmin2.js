@@ -46,7 +46,6 @@ const AllOrderAdmin2 = () => {
     //calculate the total income
     totalPrice += order.total;
   });
-  console.log(totalPrice);
   let lunchIndex = 0;
   let dinnerIndex = 0;
   let index = 0.0;

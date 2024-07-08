@@ -286,12 +286,23 @@ async function run () {
       res.send(result)
     })
 
+    app.put("/add-review/:id",async(req,res)=>{
+      const id = req.params.id
+      const review = req.body.review
+      console.log(review)
+      const filter = { _id: ObjectId(id) }
+      const update = { $set: { review:review } }
+      const options = { upset: true }
+      const result = await orderCollection.updateOne(filter, update, options)
+      console.log(result)
+      res.send(result)
+    })
+
     app.put('/updateRiderOrder', async (req, res) => {
       const id = req.body.id
       const riderEmail = req.body.riderEmail
       const riderName = req.body.riderName
       const status = req.body.status
-      console.log(id, riderEmail, riderName)
       const filter = { _id: ObjectId(id) }
       const update = { $set: { status:status,riderEmail, riderName } }
       const options = { upset: true }

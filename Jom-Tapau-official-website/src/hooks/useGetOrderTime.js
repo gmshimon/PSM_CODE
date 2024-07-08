@@ -8,7 +8,6 @@ const useGetOrderTime = ()=>{
 
    //generate the current hours 
     const time = date.getHours();
-    console.log(time)
 
     let lunchOrder = [];
     let dinnerOrder = [];
@@ -35,10 +34,8 @@ const useGetOrderTime = ()=>{
         if(order.deliveryDate===today){
             if(order.deliveryTime==="Lunch"){
                 generateExcelData(lunchOrder,order);
-                console.log("Lunch",lunchOrder);
             }else{
                 console.log("Dinner",order)
-                generateExcelData(dinnerOrder,order)
             }
         }
     })

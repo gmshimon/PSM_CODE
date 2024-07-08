@@ -8,7 +8,8 @@ const OrderTable = ({order,index}) => {
           <th scope="row">{++index}</th>
           <td>
             {order.name} <br />
-            {order.phoneNumber}{" "}
+            {order.phoneNumber}{" "}<br />
+            Review:  {order?.review}
           </td>
           <td>{order.deliveryAddress} <br/> {order.roomNumber} </td>
           <td>
