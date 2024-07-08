@@ -261,12 +261,21 @@ async function run () {
       const options = { upset: true }
       const update = { $set: foodDetails }
       const result = await foodCollection.updateOne(filter, update, options)
-
-      console.log(result)
       res.send(result)
-      console.log(foodDetails)
     })
 
+    //
+    app.get('/orders-count', async (req, res) => {
+      try {
+        const orders = await orderCollection.aggregate([
+          { $group: { name: "$deliveryAddress", value: { $sum: 1 } } }
+        ]).toArray();
+
+        res.json(orders);
+      } catch (error) {
+        res.status(500).send(error.message);
+      }
+    });
     //post order
     app.post('/postOrder', async (req, res) => {
       const { newOrder } = req.body
