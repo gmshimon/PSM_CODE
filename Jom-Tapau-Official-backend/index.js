@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 const stripe = require('stripe')(
-  'sk_test_51MMQcGDknvLebi91i2QfdPbopu4IknXtSDaZoUevRjmOkkdSeaIUBfFG1kDmI56G7bFxNWeGOw07VHU2YnLr5HhB00OnhquAap'
+  `${process.env.STRIPE}`
 )
 
 const user = process.env.DB_USER
@@ -27,11 +27,9 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1
 })
 
-const client_ID =
-  '508658699000-dsprn67sq0peddm44n65o79chusg2cre.apps.googleusercontent.com'
-const client_secret = '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'
-const refresh_token =
-  '1//04hmCwSQHiCbBCgYIARAAGAQSNwF-L9IrVPGNaRBuv7J294EqVM9AjKwdJG5HLAjh4j0aVuTV-rnE5Oq7Ow4TE5LJbd_L7i7X_K4'
+const client_ID = process.env.CLIENT_ID
+const client_secret = process.env.CLIENT_SECRET
+const refresh_token = process.env.REFRESH_TOKEN
  
 // Transporter configuration
 let transporter = nodemailer.createTransport({
